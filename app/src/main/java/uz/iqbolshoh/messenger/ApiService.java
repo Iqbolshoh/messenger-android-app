@@ -5,11 +5,13 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
+import java.util.Map;
+
 public interface ApiService {
 
     // 1. Login
     @POST("auth/login.php")
-    Call<LoginResponse> login(@Body LoginRequest loginRequest);
+    Call<BaseResponse> login(@Body Map<String, String> credentials);
 
     // 2. Logout
     @POST("auth/logout.php")
@@ -17,8 +19,7 @@ public interface ApiService {
 
     // 3. Signup
     @POST("auth/signup.php")
-    Call<SignupResponse> signup(@Body SignupRequest signupRequest);
-
+    Call<BaseResponse> signup(@Body Map<String, String> userDetails);
 
     // 4. Check Availability
     @POST("auth/check_availability.php")
