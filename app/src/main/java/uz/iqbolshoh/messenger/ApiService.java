@@ -9,7 +9,7 @@ public interface ApiService {
 
     // 1. Login
     @POST("auth/login.php")
-    Call<BaseResponse> login(@Body Map<String, String> credentials);
+    Call<LoginResponse> login(@Body LoginRequest loginRequest);
 
     // 2. Logout
     @POST("auth/logout.php")
@@ -17,7 +17,8 @@ public interface ApiService {
 
     // 3. Signup
     @POST("auth/signup.php")
-    Call<BaseResponse> signup(@Body Map<String, String> userDetails);
+    Call<SignupResponse> signup(@Body SignupRequest signupRequest);
+
 
     // 4. Check Availability
     @POST("auth/check_availability.php")
