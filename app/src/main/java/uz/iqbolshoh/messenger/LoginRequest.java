@@ -1,2 +1,6 @@
-package uz.iqbolshoh.messenger;public class LoginRequest {
+package uz.iqbolshoh.messenger;
+
+public class LoginRequest
+{
+
 }
