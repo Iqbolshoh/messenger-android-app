@@ -7,31 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Foydalanuvchi ID kiritish uchun EditText -->
-    <EditText
-        android:id="@+id/et_user_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Enter User ID"
-        android:inputType="number"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_margin="16dp" />
-
-    <!-- Check Login APIni chaqirish uchun Button -->
+    <!-- API so'rovini yuborish tugmasi -->
     <Button
         android:id="@+id/btn_check_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Check Login"
-        app:layout_constraintTop_toBottomOf="@id/et_user_id"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintBottom_toTopOf="@id/tv_response" />
 
-    <!-- API javoblarini ko'rsatish uchun TextView -->
+    <!-- Javobni ko'rsatish uchun TextView -->
     <TextView
         android:id="@+id/tv_response"
         android:layout_width="0dp"
@@ -42,6 +29,5 @@
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@id/btn_check_login"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
