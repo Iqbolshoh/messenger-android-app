@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(() -> tvResponse.setText(responseBody));
             } catch (Exception e) {
                 runOnUiThread(() -> tvResponse.setText(getString(R.string.failed_to_connect)));
+                // Log is removed because it's no longer needed
             }
         }).start();
     }
