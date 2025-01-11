@@ -29,7 +29,7 @@ class ApiConfig {
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
         OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(JSON, jsonBody.getBytes(StandardCharsets.UTF_8));
+        RequestBody body = RequestBody.create(JSON, jsonBody);
 
         Request request = new Request.Builder()
                 .url(BASE_URL + endpoint)

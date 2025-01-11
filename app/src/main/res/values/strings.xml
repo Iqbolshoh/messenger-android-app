@@ -6,4 +6,9 @@
     <string name="empty_fields_error">Please fill in all fields.</string>
     <string name="login_success">Welcome, %1$s!</string>
     <string name="server_error">Failed to connect to the server.</string>
+    <string name="checking_login_status">Checking login status&#8230;</string>
+    <string name="failed_to_connect">Failed to connect to server.</string>
+    <string name="check_button">Check Status</string>
+    <string name="text_view_status">Response will appear here</string>
+    <string name="go_login_button">Go to Login</string>
 </resources>

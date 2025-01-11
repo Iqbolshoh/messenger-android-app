@@ -1,7 +1,7 @@
 package uz.iqbolshoh.messenger;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +16,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tvResponse = findViewById(R.id.tv_response);
+        Button btnCheckStatus = findViewById(R.id.btn_check_status);  // Changed to local variable
 
-        checkLogin();
+        btnCheckStatus.setOnClickListener(v -> checkLogin());
     }
 
     private void checkLogin() {
@@ -30,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(() -> tvResponse.setText(responseBody));
             } catch (Exception e) {
                 runOnUiThread(() -> tvResponse.setText(getString(R.string.failed_to_connect)));
-                Log.e("API_ERROR", "Error: " + e.getMessage());
             }
         }).start();
     }
