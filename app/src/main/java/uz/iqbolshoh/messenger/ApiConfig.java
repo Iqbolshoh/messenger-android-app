@@ -1,7 +1,9 @@
 package uz.iqbolshoh.messenger;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 class ApiConfig {
@@ -24,8 +26,11 @@ class ApiConfig {
     }
 
     public static String postApiResponse(String endpoint, String jsonBody) throws Exception {
+        MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
         OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(jsonBody, MediaType.get("application/json; charset=utf-8"));
+        RequestBody body = RequestBody.create(JSON, jsonBody.getBytes(StandardCharsets.UTF_8));
+
         Request request = new Request.Builder()
                 .url(BASE_URL + endpoint)
                 .post(body)
@@ -39,6 +44,4 @@ class ApiConfig {
             }
         }
     }
-
 }
-
