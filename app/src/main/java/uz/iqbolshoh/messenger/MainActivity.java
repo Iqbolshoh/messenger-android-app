@@ -21,30 +21,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkLogin() {
-        tvResponse.setText("Checking login status...");
+        tvResponse.setText(getString(R.string.checking_login_status));
 
-        // Asinxron so'rov
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String responseBody = ApiConfig.getApiResponse("auth/check_login.php");
+        new Thread(() -> {
+            try {
+                String responseBody = ApiConfig.getApiResponse("auth/check_login.php");
 
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            tvResponse.setText(responseBody);
-                        }
-                    });
-                } catch (Exception e) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            tvResponse.setText("Failed to connect to the server.");
-                        }
-                    });
-                    Log.e("API_ERROR", "Error: " + e.getMessage());
-                }
+                runOnUiThread(() -> tvResponse.setText(responseBody));
+            } catch (Exception e) {
+                runOnUiThread(() -> tvResponse.setText(getString(R.string.failed_to_connect)));
+                Log.e("API_ERROR", "Error: " + e.getMessage());
             }
         }).start();
     }

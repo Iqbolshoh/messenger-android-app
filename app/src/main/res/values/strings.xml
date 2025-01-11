@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Social Messenger</string>
+    <string name="checking_login_status">Checking login status&#8230;</string>
+    <string name="failed_to_connect">Failed to connect to the server.</string>
 </resources>
