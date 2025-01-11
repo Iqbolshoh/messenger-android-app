@@ -22,5 +22,23 @@ class ApiConfig {
             }
         }
     }
+
+    public static String postApiResponse(String endpoint, String jsonBody) throws Exception {
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = RequestBody.create(jsonBody, MediaType.get("application/json; charset=utf-8"));
+        Request request = new Request.Builder()
+                .url(BASE_URL + endpoint)
+                .post(body)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful() && response.body() != null) {
+                return response.body().string();
+            } else {
+                throw new Exception("Response Code: " + response.code());
+            }
+        }
+    }
+
 }
 
