@@ -6,13 +6,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
 public class MainActivity extends AppCompatActivity {
 
-    private static final String URL = "https://messenger.iqbolshoh.uz/api/auth/check_login.php";
     private TextView tvResponse;
 
     @Override
@@ -22,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
         tvResponse = findViewById(R.id.tv_response);
 
-        // Ekran ochilishi bilan login holatini tekshirish
         checkLogin();
     }
 
@@ -34,28 +28,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder().url(URL).build();
-                    Response response = client.newCall(request).execute();
+                    String responseBody = ApiConfig.getApiResponse("auth/check_login.php");
 
-                    if (response.isSuccessful() && response.body() != null) {
-                        final String responseBody = response.body().string();
-
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                tvResponse.setText(responseBody);
-                            }
-                        });
-                    } else {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                tvResponse.setText("Failed to fetch login status.");
-                            }
-                        });
-                        Log.e("API_ERROR", "Response Code: " + response.code());
-                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tvResponse.setText(responseBody);
+                        }
+                    });
                 } catch (Exception e) {
                     runOnUiThread(new Runnable() {
                         @Override
