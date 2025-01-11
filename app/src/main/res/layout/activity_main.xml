@@ -7,18 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- API so'rovini yuborish tugmasi -->
-    <Button
-        android:id="@+id/btn_check_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Check Login"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tv_response" />
-
-    <!-- Javobni ko'rsatish uchun TextView -->
+    <!-- Faqat TextView element qoldirildi -->
     <TextView
         android:id="@+id/tv_response"
         android:layout_width="0dp"
@@ -26,8 +15,9 @@
         android:text="Response will appear here"
         android:textSize="16sp"
         android:padding="16dp"
-        android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@id/btn_check_login"
+        android:textColor="#fff000"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
