@@ -13,9 +13,6 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONObject;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etUsername, etPassword;
@@ -58,13 +55,11 @@ public class LoginActivity extends AppCompatActivity {
         tilUsername.setError(null);
         tilPassword.setError(null);
 
-        String hashedPassword = hashPassword(password);
-
         new Thread(() -> {
             try {
                 JSONObject jsonData = new JSONObject();
                 jsonData.put("username", username);
-                jsonData.put("password", hashedPassword);
+                jsonData.put("password", password);
 
                 String response = ApiConfig.postApiResponse("auth/login.php", jsonData.toString());
 
@@ -93,22 +88,5 @@ public class LoginActivity extends AppCompatActivity {
                 runOnUiThread(() -> Toast.makeText(this, R.string.server_error, Toast.LENGTH_SHORT).show());
             }
         }).start();
-    }
-
-    private String hashPassword(String password) {
-        try {
-            String secret = "iqbolshoh";
-            Mac mac = Mac.getInstance("HmacSHA256");
-            SecretKeySpec secretKeySpec = new SecretKeySpec(secret.getBytes(), "HmacSHA256");
-            mac.init(secretKeySpec);
-            byte[] hashBytes = mac.doFinal(password.getBytes());
-            StringBuilder hashString = new StringBuilder();
-            for (byte b : hashBytes) {
-                hashString.append(String.format("%02x", b));
-            }
-            return hashString.toString();
-        } catch (Exception e) {
-            throw new RuntimeException("Error hashing password", e);
-        }
     }
 }
