@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etUsername, etPassword;
@@ -36,11 +39,14 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        // Hash the password
+        String hashedPassword = hashPassword(password);
+
         new Thread(() -> {
             try {
                 JSONObject jsonData = new JSONObject();
                 jsonData.put("username", username);
-                jsonData.put("password", password);
+                jsonData.put("password", hashedPassword);
 
                 String response = ApiConfig.postApiResponse("auth/login.php", jsonData.toString());
 
@@ -61,9 +67,26 @@ public class LoginActivity extends AppCompatActivity {
                     runOnUiThread(() -> Toast.makeText(this, message, Toast.LENGTH_SHORT).show());
                 }
             } catch (Exception e) {
-                Log.e("LOGIN_ERROR", "Error: " + e.getMessage());
+                Log.e("LOGIN_ERROR", "Error: " + e.getMessage(), e);
                 runOnUiThread(() -> Toast.makeText(this, R.string.server_error, Toast.LENGTH_SHORT).show());
             }
         }).start();
+    }
+
+    private String hashPassword(String password) {
+        try {
+            String secret = "iqbolshoh";
+            Mac mac = Mac.getInstance("HmacSHA256");
+            SecretKeySpec secretKeySpec = new SecretKeySpec(secret.getBytes(), "HmacSHA256");
+            mac.init(secretKeySpec);
+            byte[] hashBytes = mac.doFinal(password.getBytes());
+            StringBuilder hashString = new StringBuilder();
+            for (byte b : hashBytes) {
+                hashString.append(String.format("%02x", b));
+            }
+            return hashString.toString();
+        } catch (Exception e) {
+            throw new RuntimeException("Error hashing password", e);
+        }
     }
 }
