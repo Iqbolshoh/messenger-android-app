@@ -23,7 +23,7 @@ public class CheckLoginActivity {
             try {
                 String responseBody = ApiConfig.getApiResponse("auth/check_login.php");
 
-                if (responseBody.contains("\"loggedIn\":false")) { // Typo 'loggedin' corrected to 'loggedIn'
+                if (responseBody.contains("\"loggedIn\":false")) {
                     runOnUiThread(() -> {
                         setTextViewText(R.string.logged_out_message);
                         startLoginActivity();
