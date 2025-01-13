@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView tvResponse = findViewById(R.id.tv_response);
 
-        CheckLoginActivity checkLogin = new CheckLoginActivity(this, tvResponse);
-        checkLogin.checkLogin();
+        CheckLoginActivity checkLoginActivity = new CheckLoginActivity(this, tvResponse);
+        checkLoginActivity.checkLogin();
     }
 }

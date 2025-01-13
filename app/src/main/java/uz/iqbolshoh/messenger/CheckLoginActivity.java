@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.TextView;
 
-import androidx.annotation.StringRes;
-
 public class CheckLoginActivity {
 
     private final Context context;
@@ -17,23 +15,21 @@ public class CheckLoginActivity {
     }
 
     public void checkLogin() {
-        setTextViewText(R.string.checking_login_status);
+        tvResponse.setText(R.string.checking_login_status);
 
         new Thread(() -> {
             try {
                 String responseBody = ApiConfig.getApiResponse("auth/check_login.php");
 
-                if (responseBody.contains("\"loggedIn\":false")) {
-                    runOnUiThread(() -> {
-                        setTextViewText(R.string.logged_out_message);
+                if (responseBody.contains("\"loggedin\":false")) {
+                    ((MainActivity) context).runOnUiThread(() -> {
+                        tvResponse.setText(R.string.logged_out_message);
                         startLoginActivity();
                     });
-                } else {
-                    runOnUiThread(() -> setTextViewText(R.string.logged_in_message));
                 }
             } catch (Exception e) {
-                runOnUiThread(() -> {
-                    setTextViewText(R.string.failed_to_connect);
+                ((MainActivity) context).runOnUiThread(() -> {
+                    tvResponse.setText(R.string.failed_to_connect);
                     startLoginActivity();
                 });
             }
@@ -46,15 +42,5 @@ public class CheckLoginActivity {
         if (context instanceof MainActivity) {
             ((MainActivity) context).finish();
         }
-    }
-
-    private void runOnUiThread(Runnable action) {
-        if (context instanceof MainActivity) {
-            ((MainActivity) context).runOnUiThread(action);
-        }
-    }
-
-    private void setTextViewText(@StringRes int stringResId) {
-        tvResponse.setText(context.getString(stringResId));
     }
 }

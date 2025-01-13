@@ -14,5 +14,4 @@
     <string name="server_error">Failed to connect to the server.</string>
     <!--CheckLoginActivity-->
     <string name="logged_out_message">You are logged out.</string>
-    <string name="logged_in_message">You are logged in.</string>
 </resources>
