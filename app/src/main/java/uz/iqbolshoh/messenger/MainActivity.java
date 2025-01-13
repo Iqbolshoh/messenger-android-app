@@ -1,5 +1,6 @@
 package uz.iqbolshoh.messenger;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,9 +17,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         tvResponse = findViewById(R.id.tv_response);
-        Button btnCheckStatus = findViewById(R.id.btn_check_status);  // Changed to local variable
-
+        Button btnCheckStatus = findViewById(R.id.btn_check_status);
+        Button btnLoginPage = findViewById(R.id.btn_login_page);
         btnCheckStatus.setOnClickListener(v -> checkLogin());
+
+        btnLoginPage.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void checkLogin() {
@@ -31,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(() -> tvResponse.setText(responseBody));
             } catch (Exception e) {
                 runOnUiThread(() -> tvResponse.setText(getString(R.string.failed_to_connect)));
-                // Log is removed because it's no longer needed
             }
         }).start();
     }
