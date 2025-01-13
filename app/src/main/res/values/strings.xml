@@ -1,13 +1,18 @@
 <resources>
+    <!--    AppName-->
     <string name="app_name">Social Messenger</string>
+    <!--    MainActivity-->
+    <string name="checking_login_status">Checking login status&#8230;</string>
+    <string name="failed_to_connect">Failed to connect to server.</string>
+    <string name="check_button">Check Status</string>
+    <!--    loginActivity-->
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="empty_fields_error">Please fill in all fields.</string>
     <string name="login_success">Welcome, %1$s!</string>
     <string name="server_error">Failed to connect to the server.</string>
-    <string name="checking_login_status">Checking login status&#8230;</string>
-    <string name="failed_to_connect">Failed to connect to server.</string>
-    <string name="check_button">Check Status</string>
-    <string name="text_view_status">Response will appear here</string>
+    <!--CheckLoginActivity-->
+    <string name="logged_out_message">You are logged out.</string>
+    <string name="logged_in_message">You are logged in.</string>
 </resources>
