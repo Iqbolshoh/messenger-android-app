@@ -9,6 +9,8 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 import org.json.JSONObject;
 
 import javax.crypto.Mac;
@@ -17,12 +19,15 @@ import javax.crypto.spec.SecretKeySpec;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etUsername, etPassword;
+    private TextInputLayout tilUsername, tilPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        tilUsername = findViewById(R.id.til_username);
+        tilPassword = findViewById(R.id.til_password);
         etUsername = findViewById(R.id.et_username);
         etPassword = findViewById(R.id.et_password);
         Button btnLogin = findViewById(R.id.btn_login);
@@ -35,11 +40,24 @@ public class LoginActivity extends AppCompatActivity {
         String password = etPassword.getText().toString().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, R.string.empty_fields_error, Toast.LENGTH_SHORT).show();
+            if (username.isEmpty()) {
+                tilUsername.setError(getString(R.string.empty_username_error));
+            } else {
+                tilUsername.setError(null);
+            }
+
+            if (password.isEmpty()) {
+                tilPassword.setError(getString(R.string.empty_password_error));
+            } else {
+                tilPassword.setError(null);
+            }
+
             return;
         }
 
-        // Hash the password
+        tilUsername.setError(null);
+        tilPassword.setError(null);
+
         String hashedPassword = hashPassword(password);
 
         new Thread(() -> {
@@ -64,7 +82,11 @@ public class LoginActivity extends AppCompatActivity {
                     });
                 } else {
                     String message = jsonResponse.getString("message");
-                    runOnUiThread(() -> Toast.makeText(this, message, Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                        tilUsername.setError(message);
+                        tilPassword.setError(message);
+                    });
                 }
             } catch (Exception e) {
                 Log.e("LOGIN_ERROR", "Error: " + e.getMessage(), e);

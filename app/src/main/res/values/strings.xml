@@ -10,6 +10,8 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="empty_fields_error">Please fill in all fields.</string>
+    <string name="empty_username_error">Please enter your username.</string>
+    <string name="empty_password_error">Please enter your password.</string>
     <string name="login_success">Welcome, %1$s!</string>
     <string name="server_error">Failed to connect to the server.</string>
     <!--CheckLoginActivity-->
