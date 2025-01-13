@@ -88,5 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                 runOnUiThread(() -> Toast.makeText(this, R.string.server_error, Toast.LENGTH_SHORT).show());
             }
         }).start();
+
     }
 }
